@@ -194,5 +194,20 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\management.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\editpaper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\diskette.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\edituser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\adduser.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

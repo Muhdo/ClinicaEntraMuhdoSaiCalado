@@ -7,6 +7,13 @@ Public Class Form3
     Dim ListaUtente() As Utentes
 
     Dim ButaoGuardar As Boolean 'True = Adicionar, False = Editar
+    Dim UtenteSaudeValido As Boolean = False
+    Dim DataValido As Boolean = True
+    Dim CidadeValido As Boolean = True
+    Dim MoradaValido As Boolean = True
+    Dim CodigoPostalValido As Boolean = True
+    Dim ContactoValido As Boolean = True
+    Dim EmailValido As Boolean = True
 
     Private Sub Btn_Close_Click(sender As Object, e As EventArgs) Handles Btn_Close.Click
         Form2.Show()
@@ -45,6 +52,14 @@ Public Class Form3
         conexao.Close()
     End Sub
 
+    Private Sub Lst_Utentes_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Lst_Utentes.SelectedIndexChanged
+        If Lst_Utentes.SelectedIndices.Count >= 1 Then
+            Btn_EditarUtente.Enabled = True
+        ElseIf Lst_Utentes.SelectedIndices.Count = 0 Then
+            Btn_EditarUtente.Enabled = False
+        End If
+    End Sub
+
     Private Sub Btn_AdicionarUtente_Click(sender As Object, e As EventArgs) Handles Btn_AdicionarUtente.Click
         Tb_NomeUtente.Text = Nothing
         Tb_NumeroUtente.Text = Nothing
@@ -78,6 +93,9 @@ Public Class Form3
             Tb_Contacto.ReadOnly = True
             Tb_Email.ReadOnly = True
         End If
+    End Sub
+
+    Sub Validar()
 
     End Sub
 
@@ -99,5 +117,13 @@ Public Class Form3
                 Tb_NomeUtente.SelectionStart = index
             End If
         Next
+
+        If Tb_NomeUtente.Text.Length >= 6 Then
+
+        End If
+    End Sub
+
+    Private Sub Tb_NumeroUtente_TextChanged(sender As Object, e As EventArgs) Handles Tb_NumeroUtente.TextChanged
+
     End Sub
 End Class

@@ -27,8 +27,6 @@ Partial Class Form3
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Lst_Utentes = New System.Windows.Forms.ListView()
         Me.Utente = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Medico = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Data = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -51,6 +49,8 @@ Partial Class Form3
         Me.Btn_EditarUtente = New System.Windows.Forms.Button()
         Me.Btn_AdicionarUtente = New System.Windows.Forms.Button()
         Me.Btn_Guardar = New System.Windows.Forms.Button()
+        Me.UtenteSaude = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Lbl_SaveMethod = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -60,7 +60,7 @@ Partial Class Form3
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.DarkCyan
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.Panel1.Controls.Add(Me.Btn_Close)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
@@ -75,6 +75,9 @@ Partial Class Form3
         Me.Btn_Close.Cursor = System.Windows.Forms.Cursors.Default
         Me.Btn_Close.Dock = System.Windows.Forms.DockStyle.Right
         Me.Btn_Close.FlatAppearance.BorderSize = 0
+        Me.Btn_Close.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent
+        Me.Btn_Close.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkRed
+        Me.Btn_Close.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red
         Me.Btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Btn_Close.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Btn_Close.ForeColor = System.Drawing.Color.White
@@ -97,9 +100,10 @@ Partial Class Form3
         '
         'Lst_Utentes
         '
-        Me.Lst_Utentes.BackColor = System.Drawing.Color.MediumTurquoise
-        Me.Lst_Utentes.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Utente, Me.Medico, Me.Data})
+        Me.Lst_Utentes.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.Lst_Utentes.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Utente, Me.UtenteSaude})
         Me.Lst_Utentes.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Lst_Utentes.ForeColor = System.Drawing.Color.White
         Me.Lst_Utentes.FullRowSelect = True
         Me.Lst_Utentes.Location = New System.Drawing.Point(0, 0)
         Me.Lst_Utentes.MultiSelect = False
@@ -112,17 +116,7 @@ Partial Class Form3
         'Utente
         '
         Me.Utente.Text = "Utente"
-        Me.Utente.Width = 120
-        '
-        'Medico
-        '
-        Me.Medico.Text = "Medico"
-        Me.Medico.Width = 120
-        '
-        'Data
-        '
-        Me.Data.Text = "Data"
-        Me.Data.Width = 120
+        Me.Utente.Width = 180
         '
         'Panel5
         '
@@ -142,6 +136,7 @@ Partial Class Form3
         '
         'Label8
         '
+        Me.Label8.ForeColor = System.Drawing.Color.White
         Me.Label8.Location = New System.Drawing.Point(3, 69)
         Me.Label8.Margin = New System.Windows.Forms.Padding(3)
         Me.Label8.Name = "Label8"
@@ -152,6 +147,7 @@ Partial Class Form3
         '
         'Label7
         '
+        Me.Label7.ForeColor = System.Drawing.Color.White
         Me.Label7.Location = New System.Drawing.Point(3, 234)
         Me.Label7.Margin = New System.Windows.Forms.Padding(3)
         Me.Label7.Name = "Label7"
@@ -162,6 +158,7 @@ Partial Class Form3
         '
         'Label6
         '
+        Me.Label6.ForeColor = System.Drawing.Color.White
         Me.Label6.Location = New System.Drawing.Point(3, 201)
         Me.Label6.Margin = New System.Windows.Forms.Padding(3)
         Me.Label6.Name = "Label6"
@@ -172,6 +169,7 @@ Partial Class Form3
         '
         'Label5
         '
+        Me.Label5.ForeColor = System.Drawing.Color.White
         Me.Label5.Location = New System.Drawing.Point(3, 168)
         Me.Label5.Margin = New System.Windows.Forms.Padding(3)
         Me.Label5.Name = "Label5"
@@ -182,6 +180,7 @@ Partial Class Form3
         '
         'Label4
         '
+        Me.Label4.ForeColor = System.Drawing.Color.White
         Me.Label4.Location = New System.Drawing.Point(3, 135)
         Me.Label4.Margin = New System.Windows.Forms.Padding(3)
         Me.Label4.Name = "Label4"
@@ -192,6 +191,7 @@ Partial Class Form3
         '
         'Label3
         '
+        Me.Label3.ForeColor = System.Drawing.Color.White
         Me.Label3.Location = New System.Drawing.Point(3, 102)
         Me.Label3.Margin = New System.Windows.Forms.Padding(3)
         Me.Label3.Name = "Label3"
@@ -203,6 +203,7 @@ Partial Class Form3
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.White
         Me.Label2.Location = New System.Drawing.Point(3, 36)
         Me.Label2.Margin = New System.Windows.Forms.Padding(3)
         Me.Label2.Name = "Label2"
@@ -213,6 +214,7 @@ Partial Class Form3
         '
         'Label1
         '
+        Me.Label1.ForeColor = System.Drawing.Color.White
         Me.Label1.Location = New System.Drawing.Point(3, 3)
         Me.Label1.Margin = New System.Windows.Forms.Padding(3)
         Me.Label1.Name = "Label1"
@@ -311,7 +313,6 @@ Partial Class Form3
         '
         'Dtp_DataNascimento
         '
-        Me.Dtp_DataNascimento.CalendarMonthBackground = System.Drawing.Color.MediumTurquoise
         Me.Dtp_DataNascimento.CustomFormat = "dd-MM-yyyy"
         Me.Dtp_DataNascimento.Enabled = False
         Me.Dtp_DataNascimento.Format = System.Windows.Forms.DateTimePickerFormat.Custom
@@ -323,6 +324,7 @@ Partial Class Form3
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.Lbl_SaveMethod)
         Me.Panel4.Controls.Add(Me.Btn_EditarUtente)
         Me.Panel4.Controls.Add(Me.Btn_AdicionarUtente)
         Me.Panel4.Controls.Add(Me.Btn_Guardar)
@@ -334,50 +336,83 @@ Partial Class Form3
         '
         'Btn_EditarUtente
         '
-        Me.Btn_EditarUtente.BackColor = System.Drawing.Color.DarkCyan
+        Me.Btn_EditarUtente.BackColor = System.Drawing.Color.Transparent
+        Me.Btn_EditarUtente.BackgroundImage = Global.ClinicaEntraMuhdoSaiCalado.My.Resources.Resources.edituser
+        Me.Btn_EditarUtente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Btn_EditarUtente.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Btn_EditarUtente.Enabled = False
         Me.Btn_EditarUtente.FlatAppearance.BorderSize = 0
+        Me.Btn_EditarUtente.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent
+        Me.Btn_EditarUtente.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.Btn_EditarUtente.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer))
         Me.Btn_EditarUtente.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Btn_EditarUtente.ForeColor = System.Drawing.Color.White
-        Me.Btn_EditarUtente.Location = New System.Drawing.Point(267, 3)
+        Me.Btn_EditarUtente.Location = New System.Drawing.Point(210, 0)
         Me.Btn_EditarUtente.Name = "Btn_EditarUtente"
-        Me.Btn_EditarUtente.Size = New System.Drawing.Size(113, 54)
+        Me.Btn_EditarUtente.Size = New System.Drawing.Size(60, 60)
         Me.Btn_EditarUtente.TabIndex = 2
-        Me.Btn_EditarUtente.Text = "Editar Utente Atual"
         Me.Btn_EditarUtente.UseVisualStyleBackColor = False
         '
         'Btn_AdicionarUtente
         '
-        Me.Btn_AdicionarUtente.BackColor = System.Drawing.Color.DarkCyan
+        Me.Btn_AdicionarUtente.BackColor = System.Drawing.Color.Transparent
+        Me.Btn_AdicionarUtente.BackgroundImage = Global.ClinicaEntraMuhdoSaiCalado.My.Resources.Resources.adduser
+        Me.Btn_AdicionarUtente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Btn_AdicionarUtente.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Btn_AdicionarUtente.FlatAppearance.BorderSize = 0
+        Me.Btn_AdicionarUtente.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent
+        Me.Btn_AdicionarUtente.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.Btn_AdicionarUtente.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer))
         Me.Btn_AdicionarUtente.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Btn_AdicionarUtente.ForeColor = System.Drawing.Color.White
-        Me.Btn_AdicionarUtente.Location = New System.Drawing.Point(148, 3)
+        Me.Btn_AdicionarUtente.Location = New System.Drawing.Point(144, 0)
         Me.Btn_AdicionarUtente.Name = "Btn_AdicionarUtente"
-        Me.Btn_AdicionarUtente.Size = New System.Drawing.Size(113, 54)
+        Me.Btn_AdicionarUtente.Size = New System.Drawing.Size(60, 60)
         Me.Btn_AdicionarUtente.TabIndex = 1
-        Me.Btn_AdicionarUtente.Text = "Adicionar Novo Utente"
         Me.Btn_AdicionarUtente.UseVisualStyleBackColor = False
         '
         'Btn_Guardar
         '
-        Me.Btn_Guardar.BackColor = System.Drawing.Color.DarkCyan
+        Me.Btn_Guardar.BackColor = System.Drawing.Color.Transparent
+        Me.Btn_Guardar.BackgroundImage = Global.ClinicaEntraMuhdoSaiCalado.My.Resources.Resources.diskette
+        Me.Btn_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Btn_Guardar.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Btn_Guardar.Enabled = False
         Me.Btn_Guardar.FlatAppearance.BorderSize = 0
+        Me.Btn_Guardar.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent
+        Me.Btn_Guardar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.Btn_Guardar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer))
         Me.Btn_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Btn_Guardar.ForeColor = System.Drawing.Color.White
-        Me.Btn_Guardar.Location = New System.Drawing.Point(814, 3)
+        Me.Btn_Guardar.Location = New System.Drawing.Point(870, 0)
         Me.Btn_Guardar.Name = "Btn_Guardar"
-        Me.Btn_Guardar.Size = New System.Drawing.Size(113, 54)
+        Me.Btn_Guardar.Size = New System.Drawing.Size(60, 60)
         Me.Btn_Guardar.TabIndex = 0
-        Me.Btn_Guardar.Text = "Guardar Dados"
         Me.Btn_Guardar.UseVisualStyleBackColor = False
+        '
+        'UtenteSaude
+        '
+        Me.UtenteSaude.Text = "Utente de Saude"
+        Me.UtenteSaude.Width = 180
+        '
+        'Lbl_SaveMethod
+        '
+        Me.Lbl_SaveMethod.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Lbl_SaveMethod.BackColor = System.Drawing.Color.Transparent
+        Me.Lbl_SaveMethod.ForeColor = System.Drawing.Color.White
+        Me.Lbl_SaveMethod.Location = New System.Drawing.Point(276, 0)
+        Me.Lbl_SaveMethod.Name = "Lbl_SaveMethod"
+        Me.Lbl_SaveMethod.Size = New System.Drawing.Size(588, 60)
+        Me.Lbl_SaveMethod.TabIndex = 3
+        Me.Lbl_SaveMethod.Text = "Botão Desativado"
+        Me.Lbl_SaveMethod.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Form3
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.BackColor = System.Drawing.Color.DarkTurquoise
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(60, Byte), Integer), CType(CType(60, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1290, 720)
         Me.ControlBox = False
         Me.Controls.Add(Me.Panel3)
@@ -409,8 +444,6 @@ Partial Class Form3
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Lst_Utentes As ListView
     Friend WithEvents Utente As ColumnHeader
-    Friend WithEvents Medico As ColumnHeader
-    Friend WithEvents Data As ColumnHeader
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
@@ -433,4 +466,6 @@ Partial Class Form3
     Friend WithEvents Tb_Morada As TextBox
     Friend WithEvents Tb_Cidade As TextBox
     Friend WithEvents Btn_EditarUtente As Button
+    Friend WithEvents UtenteSaude As ColumnHeader
+    Friend WithEvents Lbl_SaveMethod As Label
 End Class
