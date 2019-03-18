@@ -110,6 +110,18 @@ Public Class Form3
         End If
 
         For index = 0 To utente.Length - 1
+            If index > 0 AndAlso Char.IsWhiteSpace(utente(index - 1)) AndAlso Not Char.IsUpper(utente(index)) Then
+                utente(index) = Char.ToUpper(utente(index))
+                Tb_NomeUtente.Text = New String(utente)
+                Tb_NomeUtente.SelectionStart = index + 1
+            End If
+
+            If index > 0 AndAlso Char.IsLetter(utente(index - 1)) AndAlso Not Char.IsLower(utente(index)) Then
+                utente(index) = Char.ToLower(utente(index))
+                Tb_NomeUtente.Text = New String(utente)
+                Tb_NomeUtente.SelectionStart = index + 1
+            End If
+
             If index >= 1 AndAlso Char.IsWhiteSpace(utente(index)) AndAlso Char.IsWhiteSpace(utente(index - 1)) Then
                 Tb_NomeUtente.Text = Tb_NomeUtente.Text.Remove(index, 1)
                 Array.Clear(utente, 0, utente.Length)
