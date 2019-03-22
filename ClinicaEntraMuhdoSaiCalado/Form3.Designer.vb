@@ -27,6 +27,7 @@ Partial Class Form3
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Lst_Utentes = New System.Windows.Forms.ListView()
         Me.Utente = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.UtenteSaude = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -37,6 +38,8 @@ Partial Class Form3
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Lbl_ErroEmail = New System.Windows.Forms.Label()
+        Me.Lbl_ErroNumero = New System.Windows.Forms.Label()
         Me.Tb_Email = New System.Windows.Forms.TextBox()
         Me.Tb_Contacto = New System.Windows.Forms.TextBox()
         Me.Tb_CodigoPostal = New System.Windows.Forms.TextBox()
@@ -46,11 +49,12 @@ Partial Class Form3
         Me.Tb_NomeUtente = New System.Windows.Forms.TextBox()
         Me.Dtp_DataNascimento = New System.Windows.Forms.DateTimePicker()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Lbl_SaveMethod = New System.Windows.Forms.Label()
+        Me.Btn_Cancel = New System.Windows.Forms.Button()
         Me.Btn_EditarUtente = New System.Windows.Forms.Button()
         Me.Btn_AdicionarUtente = New System.Windows.Forms.Button()
         Me.Btn_Guardar = New System.Windows.Forms.Button()
-        Me.UtenteSaude = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Lbl_SaveMethod = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -61,6 +65,7 @@ Partial Class Form3
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Label13)
         Me.Panel1.Controls.Add(Me.Btn_Close)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
@@ -116,7 +121,12 @@ Partial Class Form3
         'Utente
         '
         Me.Utente.Text = "Utente"
-        Me.Utente.Width = 180
+        Me.Utente.Width = 243
+        '
+        'UtenteSaude
+        '
+        Me.UtenteSaude.Text = "Utente de Saude"
+        Me.UtenteSaude.Width = 113
         '
         'Panel5
         '
@@ -225,6 +235,8 @@ Partial Class Form3
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.Lbl_ErroEmail)
+        Me.Panel3.Controls.Add(Me.Lbl_ErroNumero)
         Me.Panel3.Controls.Add(Me.Tb_Email)
         Me.Panel3.Controls.Add(Me.Tb_Contacto)
         Me.Panel3.Controls.Add(Me.Tb_CodigoPostal)
@@ -241,6 +253,28 @@ Partial Class Form3
         Me.Panel3.Size = New System.Drawing.Size(930, 685)
         Me.Panel3.TabIndex = 3
         '
+        'Lbl_ErroEmail
+        '
+        Me.Lbl_ErroEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Lbl_ErroEmail.ForeColor = System.Drawing.Color.White
+        Me.Lbl_ErroEmail.Location = New System.Drawing.Point(145, 265)
+        Me.Lbl_ErroEmail.Margin = New System.Windows.Forms.Padding(3)
+        Me.Lbl_ErroEmail.Name = "Lbl_ErroEmail"
+        Me.Lbl_ErroEmail.Size = New System.Drawing.Size(782, 27)
+        Me.Lbl_ErroEmail.TabIndex = 27
+        Me.Lbl_ErroEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Lbl_ErroNumero
+        '
+        Me.Lbl_ErroNumero.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Lbl_ErroNumero.ForeColor = System.Drawing.Color.White
+        Me.Lbl_ErroNumero.Location = New System.Drawing.Point(354, 36)
+        Me.Lbl_ErroNumero.Margin = New System.Windows.Forms.Padding(3)
+        Me.Lbl_ErroNumero.Name = "Lbl_ErroNumero"
+        Me.Lbl_ErroNumero.Size = New System.Drawing.Size(570, 27)
+        Me.Lbl_ErroNumero.TabIndex = 8
+        Me.Lbl_ErroNumero.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'Tb_Email
         '
         Me.Tb_Email.BackColor = System.Drawing.Color.White
@@ -248,7 +282,7 @@ Partial Class Form3
         Me.Tb_Email.MaxLength = 256
         Me.Tb_Email.Name = "Tb_Email"
         Me.Tb_Email.ReadOnly = True
-        Me.Tb_Email.Size = New System.Drawing.Size(776, 23)
+        Me.Tb_Email.Size = New System.Drawing.Size(779, 23)
         Me.Tb_Email.TabIndex = 26
         '
         'Tb_Contacto
@@ -278,7 +312,7 @@ Partial Class Form3
         Me.Tb_Morada.MaxLength = 60
         Me.Tb_Morada.Name = "Tb_Morada"
         Me.Tb_Morada.ReadOnly = True
-        Me.Tb_Morada.Size = New System.Drawing.Size(776, 23)
+        Me.Tb_Morada.Size = New System.Drawing.Size(779, 23)
         Me.Tb_Morada.TabIndex = 23
         '
         'Tb_Cidade
@@ -324,6 +358,7 @@ Partial Class Form3
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.Btn_Cancel)
         Me.Panel4.Controls.Add(Me.Lbl_SaveMethod)
         Me.Panel4.Controls.Add(Me.Btn_EditarUtente)
         Me.Panel4.Controls.Add(Me.Btn_AdicionarUtente)
@@ -334,10 +369,42 @@ Partial Class Form3
         Me.Panel4.Size = New System.Drawing.Size(930, 60)
         Me.Panel4.TabIndex = 0
         '
+        'Lbl_SaveMethod
+        '
+        Me.Lbl_SaveMethod.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Lbl_SaveMethod.BackColor = System.Drawing.Color.Transparent
+        Me.Lbl_SaveMethod.ForeColor = System.Drawing.Color.White
+        Me.Lbl_SaveMethod.Location = New System.Drawing.Point(342, 0)
+        Me.Lbl_SaveMethod.Name = "Lbl_SaveMethod"
+        Me.Lbl_SaveMethod.Size = New System.Drawing.Size(522, 60)
+        Me.Lbl_SaveMethod.TabIndex = 3
+        Me.Lbl_SaveMethod.Text = "Sem Metodo Definido"
+        Me.Lbl_SaveMethod.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Btn_Cancel
+        '
+        Me.Btn_Cancel.BackColor = System.Drawing.Color.Transparent
+        Me.Btn_Cancel.BackgroundImage = Global.ClinicaEntraMuhdoSaiCalado.My.Resources.Resources.cancelgray
+        Me.Btn_Cancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Btn_Cancel.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Btn_Cancel.Enabled = False
+        Me.Btn_Cancel.FlatAppearance.BorderSize = 0
+        Me.Btn_Cancel.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent
+        Me.Btn_Cancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.Btn_Cancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer))
+        Me.Btn_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Btn_Cancel.ForeColor = System.Drawing.Color.White
+        Me.Btn_Cancel.Location = New System.Drawing.Point(276, 0)
+        Me.Btn_Cancel.Name = "Btn_Cancel"
+        Me.Btn_Cancel.Size = New System.Drawing.Size(60, 60)
+        Me.Btn_Cancel.TabIndex = 4
+        Me.Btn_Cancel.UseVisualStyleBackColor = False
+        '
         'Btn_EditarUtente
         '
         Me.Btn_EditarUtente.BackColor = System.Drawing.Color.Transparent
-        Me.Btn_EditarUtente.BackgroundImage = Global.ClinicaEntraMuhdoSaiCalado.My.Resources.Resources.edituser
+        Me.Btn_EditarUtente.BackgroundImage = Global.ClinicaEntraMuhdoSaiCalado.My.Resources.Resources.editusergray
         Me.Btn_EditarUtente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Btn_EditarUtente.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Btn_EditarUtente.Enabled = False
@@ -374,7 +441,7 @@ Partial Class Form3
         'Btn_Guardar
         '
         Me.Btn_Guardar.BackColor = System.Drawing.Color.Transparent
-        Me.Btn_Guardar.BackgroundImage = Global.ClinicaEntraMuhdoSaiCalado.My.Resources.Resources.diskette
+        Me.Btn_Guardar.BackgroundImage = Global.ClinicaEntraMuhdoSaiCalado.My.Resources.Resources.diskettegray
         Me.Btn_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Btn_Guardar.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Btn_Guardar.Enabled = False
@@ -390,23 +457,16 @@ Partial Class Form3
         Me.Btn_Guardar.TabIndex = 0
         Me.Btn_Guardar.UseVisualStyleBackColor = False
         '
-        'UtenteSaude
+        'Label13
         '
-        Me.UtenteSaude.Text = "Utente de Saude"
-        Me.UtenteSaude.Width = 180
-        '
-        'Lbl_SaveMethod
-        '
-        Me.Lbl_SaveMethod.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Lbl_SaveMethod.BackColor = System.Drawing.Color.Transparent
-        Me.Lbl_SaveMethod.ForeColor = System.Drawing.Color.White
-        Me.Lbl_SaveMethod.Location = New System.Drawing.Point(276, 0)
-        Me.Lbl_SaveMethod.Name = "Lbl_SaveMethod"
-        Me.Lbl_SaveMethod.Size = New System.Drawing.Size(588, 60)
-        Me.Lbl_SaveMethod.TabIndex = 3
-        Me.Lbl_SaveMethod.Text = "Botão Desativado"
-        Me.Lbl_SaveMethod.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label13.ForeColor = System.Drawing.Color.White
+        Me.Label13.Location = New System.Drawing.Point(12, 0)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(3)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(348, 35)
+        Me.Label13.TabIndex = 13
+        Me.Label13.Text = "Utentes"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Form3
         '
@@ -468,4 +528,8 @@ Partial Class Form3
     Friend WithEvents Btn_EditarUtente As Button
     Friend WithEvents UtenteSaude As ColumnHeader
     Friend WithEvents Lbl_SaveMethod As Label
+    Friend WithEvents Lbl_ErroEmail As Label
+    Friend WithEvents Lbl_ErroNumero As Label
+    Friend WithEvents Btn_Cancel As Button
+    Friend WithEvents Label13 As Label
 End Class

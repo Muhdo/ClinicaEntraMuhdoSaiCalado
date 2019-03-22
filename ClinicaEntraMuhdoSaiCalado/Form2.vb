@@ -4,10 +4,10 @@ Public Class Form2
     Dim connectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + Application.StartupPath + "\Clinica.mdf;Integrated Security=True;"
     Dim reader As SqlDataReader
 
-    Dim ListaConsulta() As Consultas
-    Dim ListaUtente() As Utentes
-    Dim ListaMedico() As Medicos
-    Dim ListaEspecialidade() As Especialidades
+    Dim ListaConsulta As List(Of Consultas) = New List(Of Consultas)()
+    Dim ListaUtente As List(Of Utentes) = New List(Of Utentes)()
+    Dim ListaMedico As List(Of Medicos) = New List(Of Medicos)()
+    Dim ListaEspecialidade As List(Of Especialidades) = New List(Of Especialidades)()
 
     Private Sub Btn_Close_Click(sender As Object, e As EventArgs) Handles Btn_Close.Click
         Form1.Close()
@@ -16,27 +16,25 @@ Public Class Form2
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         conexao = New SqlConnection(connectionString)
 
-        Dim queryUtentes As SqlCommand = New SqlCommand("SELECT Key_Utente, Nome, NumeroUtente, Cidade, Morada, CodigoPostal, NumeroContacto, Email FROM Utente")
+        Dim queryUtentes As SqlCommand = New SqlCommand("SELECT Key_Utente, Nome, NumeroUtente, DataNascimento, Cidade, Morada, CodigoPostal, NumeroContacto, Email FROM Utente")
         conexao.Open()
 
         queryUtentes.Connection = conexao
 
         reader = queryUtentes.ExecuteReader()
 
-        Dim i = -1
-
         While reader.Read()
-            i += 1
-            ReDim Preserve ListaUtente(i)
-
-            ListaUtente(i).KeyUtente = reader("Key_Utente")
-            ListaUtente(i).Nome = reader("Nome")
-            ListaUtente(i).NUtenteSaude = reader("NumeroUtente")
-            ListaUtente(i).Cidade = reader("Cidade")
-            ListaUtente(i).Morada = reader("Morada")
-            ListaUtente(i).CodigoPostal = reader("CodigoPostal")
-            ListaUtente(i).Contacto = reader("NumeroContacto")
-            ListaUtente(i).Email = reader("Email")
+            ListaUtente.Add(New Utentes With {
+                                .KeyUtente = reader("Key_Utente"),
+                                .Nome = reader("Nome"),
+                                .NUtenteSaude = reader("NumeroUtente"),
+                                .DataNascimento = reader("DataNascimento"),
+                                .Cidade = reader("Cidade"),
+                                .Morada = reader("Morada"),
+                                .CodigoPostal = reader("CodigoPostal"),
+                                .Contacto = reader("NumeroContacto"),
+                                .Email = reader("Email")
+                                })
         End While
 
         reader.Close()
@@ -47,22 +45,19 @@ Public Class Form2
 
         reader = queryMedicos.ExecuteReader()
 
-        i = -1
-
         While reader.Read()
-            i += 1
-            ReDim Preserve ListaMedico(i)
-
-            ListaMedico(i).KeyMedico = reader("Key_Medico")
-            ListaMedico(i).Nome = reader("Nome")
-            ListaMedico(i).CartaoCidadao = reader("CartaoCidadao")
-            ListaMedico(i).DataNascimento = reader("DataNascimento")
-            ListaMedico(i).Cidade = reader("Cidade")
-            ListaMedico(i).Morada = reader("Morada")
-            ListaMedico(i).CodigoPostal = reader("CodigoPostal")
-            ListaMedico(i).Contacto = reader("NumeroContacto")
-            ListaMedico(i).Email = reader("Email")
-            ListaMedico(i).KeyEspecialidade = reader("Key_Especialidade")
+            ListaMedico.Add(New Medicos With {
+                            .KeyMedico = reader("Key_Medico"),
+                            .Nome = reader("Nome"),
+                            .CartaoCidadao = reader("CartaoCidadao"),
+                            .DataNascimento = reader("DataNascimento"),
+                            .Cidade = reader("Cidade"),
+                            .Morada = reader("Morada"),
+                            .CodigoPostal = reader("CodigoPostal"),
+                            .Contacto = reader("NumeroContacto"),
+                            .Email = reader("Email"),
+                            .KeyEspecialidade = reader("Key_Especialidade")
+                            })
         End While
 
         reader.Close()
@@ -73,14 +68,11 @@ Public Class Form2
 
         reader = queryEspecialidade.ExecuteReader()
 
-        i = -1
-
         While reader.Read()
-            i += 1
-            ReDim Preserve ListaEspecialidade(i)
-
-            ListaEspecialidade(i).KeyEspecialidade = reader("Key_Especialidade")
-            ListaEspecialidade(i).Especialidade = reader("Especialidade")
+            ListaEspecialidade.Add(New Especialidades With {
+                            .KeyEspecialidade = reader("Key_Especialidade"),
+                            .Especialidade = reader("Especialidade")
+                            })
         End While
 
         reader.Close()
@@ -93,18 +85,15 @@ Public Class Form2
 
         reader = queryConsuta.ExecuteReader()
 
-        i = -1
-
         While reader.Read()
-            i += 1
-            ReDim Preserve ListaConsulta(i)
-
-            ListaConsulta(i).KeyConsulta = reader("Key_Consulta")
-            ListaConsulta(i).KeyUtente = reader("Key_Utente")
-            ListaConsulta(i).KeyMedico = reader("Key_Medico")
-            ListaConsulta(i).Data = reader("Data")
-            ListaConsulta(i).Descricao = reader("Descricao")
-            ListaConsulta(i).Preco = reader("Preco")
+            ListaConsulta.Add(New Consultas With {
+                                .KeyConsulta = reader("Key_Consulta"),
+                                .KeyUtente = reader("Key_Utente"),
+                                .KeyMedico = reader("Key_Medico"),
+                                .Data = reader("Data"),
+                                .Descricao = reader("Descricao"),
+                                .Preco = reader("Preco")
+                                })
         End While
 
         reader.Close()

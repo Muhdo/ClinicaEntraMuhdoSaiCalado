@@ -58,6 +58,7 @@ Partial Class Form2
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Btn_EditarConsulta = New System.Windows.Forms.Button()
         Me.Btn_Gerir = New System.Windows.Forms.Button()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -68,6 +69,7 @@ Partial Class Form2
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Label13)
         Me.Panel1.Controls.Add(Me.Btn_Close)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
@@ -489,6 +491,17 @@ Partial Class Form2
         Me.Btn_Gerir.TabIndex = 0
         Me.Btn_Gerir.UseVisualStyleBackColor = False
         '
+        'Label13
+        '
+        Me.Label13.ForeColor = System.Drawing.Color.White
+        Me.Label13.Location = New System.Drawing.Point(12, 0)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(3)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(348, 35)
+        Me.Label13.TabIndex = 12
+        Me.Label13.Text = "Página Inicial"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -555,4 +568,5 @@ Partial Class Form2
     Friend WithEvents Utente As ColumnHeader
     Friend WithEvents Medico As ColumnHeader
     Friend WithEvents Data As ColumnHeader
+    Friend WithEvents Label13 As Label
 End Class

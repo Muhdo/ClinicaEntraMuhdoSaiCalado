@@ -1,4 +1,6 @@
 ﻿Module Module1
+    Public LastForm As Byte
+
     Public Class Consultas
         Public KeyConsulta As Integer
         Public KeyUtente As Integer
