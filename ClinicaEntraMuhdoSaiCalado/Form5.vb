@@ -1,6 +1,4 @@
 ﻿Imports System.Data.SqlClient
-Imports System.Text.RegularExpressions
-Imports System.Net.Mail
 
 Public Class Form5
     Dim conexao As SqlConnection
@@ -10,6 +8,7 @@ Public Class Form5
     Dim ListaEspecialidade As List(Of Especialidades) = New List(Of Especialidades)()
 
     Dim ButaoGuardar As Boolean 'True = Adicionar, False = Editar
+    Dim ButaoClick As Boolean = False
     Dim CodigoEspecialidade As Integer = 0
 
     Dim EspecialidadeValido As Boolean = False
@@ -18,7 +17,7 @@ Public Class Form5
         If LastForm = 2 Then
             Form4.Show()
         ElseIf LastForm = 1 Then
-            Form2.Show()
+            Form7.Show()
         End If
 
         Me.Close()
@@ -52,7 +51,9 @@ Public Class Form5
 
     Private Sub Btn_AdicionarUtente_Click(sender As Object, e As EventArgs) Handles Btn_AdicionarEspecialidade.Click
         Tb_Especialidade.Text = Nothing
+        Lst_Especialidades.Enabled = False
         ButaoGuardar = True
+        ButaoClick = True
         Btn_Cancel.Enabled = True
         Btn_Cancel.BackgroundImage = My.Resources.ResourceManager.GetObject("cancel")
         Btn_AdicionarEspecialidade.Enabled = False
@@ -68,6 +69,7 @@ Public Class Form5
         CodigoEspecialidade = ListaEspecialidade.Find(Function(es) es.Especialidade = Lst_Especialidades.FocusedItem.SubItems.Item(0).Text).KeyEspecialidade
 
         ButaoGuardar = False
+        ButaoClick = True
         Btn_Cancel.Enabled = True
         Btn_Cancel.BackgroundImage = My.Resources.ResourceManager.GetObject("cancel")
         Btn_AdicionarEspecialidade.Enabled = False
@@ -76,10 +78,12 @@ Public Class Form5
         Btn_EditarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("editgray")
         Lbl_SaveMethod.Text = "Editar Especialidade"
         SwitchFields()
+        Validar()
     End Sub
 
     Private Sub Btn_Cancel_Click(sender As Object, e As EventArgs) Handles Btn_Cancel.Click
         ButaoGuardar = Nothing
+        ButaoClick = False
         Btn_EditarEspecialidade.Enabled = False
         Btn_EditarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("editgray")
         Tb_Especialidade.Text = Nothing
@@ -104,7 +108,7 @@ Public Class Form5
     End Sub
 
     Sub Dados()
-        Dim queryEspecialidades As SqlCommand = New SqlCommand("SELECT Key_Especialidade, Especialidade FROM Especialidade")
+        Dim queryEspecialidades As SqlCommand = New SqlCommand("SELECT Key_Especialidade, Especialidade FROM Especialidade ORDER BY Especialidade, Key_Especialidade")
         conexao.Open()
 
         queryEspecialidades.Connection = conexao
@@ -129,8 +133,10 @@ Public Class Form5
 
     Sub Validar()
         If EspecialidadeValido = True Then
-            Btn_Guardar.Enabled = True
-            Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskette")
+            If ButaoClick = True Then
+                Btn_Guardar.Enabled = True
+                Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskette")
+            End If
         Else
             Btn_Guardar.Enabled = False
             Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskettegray")
@@ -195,10 +201,12 @@ Public Class Form5
         Btn_EditarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("editusergray")
         Btn_Guardar.Enabled = False
         Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskettegray")
+        ButaoGuardar = False
+        ButaoClick = False
         Tb_Especialidade.Text = Nothing
+        Lst_Especialidades.Enabled = True
         Lbl_SaveMethod.Text = "Sem Metodo Definido"
         SwitchFields()
-        Lst_Especialidades.Enabled = True
 
         conexao.Close()
         Dados()

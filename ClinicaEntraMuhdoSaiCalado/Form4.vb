@@ -14,6 +14,7 @@ Public Class Form4
 
 
     Dim ButaoGuardar As Boolean 'True = Adicionar, False = Editar
+    Dim ButaoClick As Boolean = False
     Dim CodigoMedico As Integer = 0
 
     Dim NomeValido As Boolean = False
@@ -26,7 +27,7 @@ Public Class Form4
     Dim EspecialidadeValido As Boolean = False
 
     Private Sub Btn_Close_Click(sender As Object, e As EventArgs) Handles Btn_Close.Click
-        Form2.Show()
+        Form7.Show()
         Me.Close()
     End Sub
 
@@ -105,7 +106,9 @@ Public Class Form4
         Tb_Contacto.Text = Nothing
         Tb_Email.Text = Nothing
         Cb_Especialidade.SelectedItem = -1
+        Lst_Medicos.Enabled = False
         ButaoGuardar = True
+        ButaoClick = True
         Btn_Cancel.Enabled = True
         Btn_Cancel.BackgroundImage = My.Resources.ResourceManager.GetObject("cancel")
         Btn_AdicionarMedico.Enabled = False
@@ -125,6 +128,7 @@ Public Class Form4
         CodigoMedico = ListaMedico.Find(Function(m) m.Nome = Lst_Medicos.FocusedItem.SubItems.Item(0).Text And m.KeyEspecialidade = KeyEspecialidade).KeyMedico
 
         ButaoGuardar = False
+        ButaoClick = True
         Btn_Cancel.Enabled = True
         Btn_Cancel.BackgroundImage = My.Resources.ResourceManager.GetObject("cancel")
         Btn_AdicionarMedico.Enabled = False
@@ -135,10 +139,12 @@ Public Class Form4
         Btn_Especialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("areagray")
         Lbl_SaveMethod.Text = "Editar Medico"
         SwitchFields()
+        Validar()
     End Sub
 
     Private Sub Btn_Cancel_Click(sender As Object, e As EventArgs) Handles Btn_Cancel.Click
         ButaoGuardar = Nothing
+        ButaoClick = False
         Btn_EditarMedico.Enabled = False
         Btn_EditarMedico.BackgroundImage = My.Resources.ResourceManager.GetObject("editusergray")
         Tb_NomeMedico.Text = Nothing
@@ -172,6 +178,24 @@ Public Class Form4
         Lbl_SaveMethod.Text = "Sem Metodo Definido"
     End Sub
 
+    Private Sub Cb_Especialidade_DropDown(sender As Object, e As EventArgs) Handles Cb_Especialidade.DropDown
+        Dim queryEspecialidades As SqlCommand = New SqlCommand("SELECT Key_Especialidade, Especialidade FROM Especialidade WHERE Especialidade LIKE '%' + @Especialidade + '%' ORDER BY Especialidade, Key_Especialidade")
+        conexao.Open()
+        queryEspecialidades.Parameters.AddWithValue("@Especialidade", Cb_Especialidade.Text.Trim())
+        queryEspecialidades.Connection = conexao
+
+        reader = queryEspecialidades.ExecuteReader()
+
+        Cb_Especialidade.Items.Clear()
+
+        While reader.Read()
+            Cb_Especialidade.Items.Add(reader("Especialidade"))
+        End While
+
+        reader.Close()
+        conexao.Close()
+    End Sub
+
     Private Sub Btn_Especialidade_Click(sender As Object, e As EventArgs) Handles Btn_Especialidade.Click
         Form5.Show()
         Me.Close()
@@ -203,7 +227,7 @@ Public Class Form4
     End Sub
 
     Sub Dados()
-        Dim queryEspecialidades As SqlCommand = New SqlCommand("SELECT Key_Especialidade, Especialidade FROM Especialidade")
+        Dim queryEspecialidades As SqlCommand = New SqlCommand("SELECT Key_Especialidade, Especialidade FROM Especialidade ORDER BY Especialidade, Key_Especialidade")
         conexao.Open()
 
         queryEspecialidades.Connection = conexao
@@ -223,7 +247,7 @@ Public Class Form4
 
         reader.Close()
 
-        Dim queryMedicos As SqlCommand = New SqlCommand("SELECT Key_Medico, Nome, CartaoCidadao, DataNascimento, Cidade, Morada, CodigoPostal, NumeroContacto, Email, Key_Especialidade FROM Medico")
+        Dim queryMedicos As SqlCommand = New SqlCommand("SELECT Key_Medico, Nome, CartaoCidadao, DataNascimento, Cidade, Morada, CodigoPostal, NumeroContacto, Email, Key_Especialidade FROM Medico ORDER BY Nome, CartaoCidadao")
 
         queryMedicos.Connection = conexao
 
@@ -255,8 +279,10 @@ Public Class Form4
 
     Sub Validar()
         If NomeValido = True AndAlso CartaoCidadaoValido = True AndAlso CidadeValido = True AndAlso MoradaValido = True AndAlso CodigoPostalValido = True AndAlso ContactoValido = True AndAlso EmailValido = True AndAlso EspecialidadeValido Then
-            Btn_Guardar.Enabled = True
-            Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskette")
+            If ButaoClick = True Then
+                Btn_Guardar.Enabled = True
+                Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskette")
+            End If
         Else
             Btn_Guardar.Enabled = False
             Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskettegray")
@@ -326,18 +352,18 @@ Public Class Form4
             End If
         Next
 
-        If numero.Length = 9 Then
+        If numero.Length = 8 Then
             Dim queryValidar As SqlCommand = New SqlCommand("SELECT * FROM Medico WHERE CartaoCidadao = @CartaoCidadao")
             conexao.Open()
             queryValidar.Connection = conexao
-            queryValidar.Parameters.AddWithValue("@CartaoCidadao", Tb_CartaoCidadao.Text)
+            queryValidar.Parameters.AddWithValue("@CartaoCidadao", Tb_CartaoCidadao.Text.Trim())
 
             reader = queryValidar.ExecuteReader()
             If reader.HasRows Then
                 reader.Read()
 
                 If ButaoGuardar = False AndAlso CodigoMedico <> 0 Then
-                    If CodigoMedico = reader("Key_Utente") And Tb_CartaoCidadao.Text = reader("CartaoCidadao") Then
+                    If CodigoMedico = reader("Key_Medico") And Tb_CartaoCidadao.Text = reader("CartaoCidadao") Then
                         CartaoCidadaoValido = True
                         Lbl_ErroNumero.Text = Nothing
                     Else
@@ -360,8 +386,10 @@ Public Class Form4
     End Sub
 
     Private Sub Dtp_DataNascimento_ValueChanged(sender As Object, e As EventArgs) Handles Dtp_DataNascimento.ValueChanged
-        If Dtp_DataNascimento.Value.ToShortDateString > Today.ToShortDateString Then
-            Dtp_DataNascimento.Value = Today.ToShortDateString
+        If Dtp_DataNascimento.Value > Today Then
+            Dtp_DataNascimento.Value = Today
+        ElseIf Dtp_DataNascimento.Value <= Today.AddYears(-125) Then
+            Dtp_DataNascimento.Value = Today
         End If
     End Sub
 
@@ -523,9 +551,12 @@ Public Class Form4
         Else
             EspecialidadeValido = False
         End If
+
+        Validar()
     End Sub
 
     Private Sub Btn_Guardar_Click(sender As Object, e As EventArgs) Handles Btn_Guardar.Click
+        Dim key As Integer = ListaEspecialidade.Find(Function(es) es.Especialidade = Cb_Especialidade.Text.Trim()).KeyEspecialidade
         If ButaoGuardar = True Then
             Dim queryInserir As SqlCommand = New SqlCommand("INSERT INTO Medico (Nome, CartaoCidadao, DataNascimento, Cidade, Morada, CodigoPostal, NumeroContacto, Email, Key_Especialidade) VALUES (@Nome, @CartaoCidadao, @DataNascimento, @Cidade, @Morada, @CodigoPostal, @NumeroContacto, @Email, @Especialidade)")
             conexao.Open()
@@ -538,23 +569,24 @@ Public Class Form4
             queryInserir.Parameters.AddWithValue("@CodigoPostal", Tb_CodigoPostal.Text.Trim())
             queryInserir.Parameters.AddWithValue("@NumeroContacto", Tb_Contacto.Text.Trim())
             queryInserir.Parameters.AddWithValue("@Email", Tb_Email.Text.Trim())
-            queryInserir.Parameters.AddWithValue("@Especialidade", Tb_Email.Text.Trim())
+            queryInserir.Parameters.AddWithValue("@Especialidade", key)
 
             queryInserir.ExecuteNonQuery()
             queryInserir.Parameters.Clear()
         Else
-            Dim queryEditar As SqlCommand = New SqlCommand("UPDATE Medico SET Nome = @Nome, NumeroUtente = @NumeroUtente, DataNascimento = @DataNascimento, Cidade = @Cidade, Morada = @Morada, CodigoPostal = @CodigoPostal, NumeroContacto = @NumeroContacto, Email = @Email WHERE Key_Utente = @KeyUtente")
+            Dim queryEditar As SqlCommand = New SqlCommand("UPDATE Medico SET Nome = @Nome, CartaoCidadao = @CartaoCidadao, DataNascimento = @DataNascimento, Cidade = @Cidade, Morada = @Morada, CodigoPostal = @CodigoPostal, NumeroContacto = @NumeroContacto, Email = @Email, Key_Especialidade = @Especialidade WHERE Key_Medico = @KeyMedico")
             conexao.Open()
             queryEditar.Connection = conexao
             queryEditar.Parameters.AddWithValue("@Nome", Tb_NomeMedico.Text.Trim())
-            queryEditar.Parameters.AddWithValue("@NumeroUtente", Convert.ToInt64(Tb_CartaoCidadao.Text.Trim()))
+            queryEditar.Parameters.AddWithValue("@CartaoCidadao", Convert.ToInt64(Tb_CartaoCidadao.Text.Trim()))
             queryEditar.Parameters.AddWithValue("@DataNascimento", Convert.ToDateTime(Dtp_DataNascimento.Value.ToShortDateString))
             queryEditar.Parameters.AddWithValue("@Cidade", Tb_Cidade.Text.Trim())
             queryEditar.Parameters.AddWithValue("@Morada", Tb_Morada.Text.Trim())
             queryEditar.Parameters.AddWithValue("@CodigoPostal", Tb_CodigoPostal.Text.Trim())
             queryEditar.Parameters.AddWithValue("@NumeroContacto", Tb_Contacto.Text.Trim())
             queryEditar.Parameters.AddWithValue("@Email", Tb_Email.Text.Trim())
-            queryEditar.Parameters.AddWithValue("@KeyUtente", CodigoMedico)
+            queryEditar.Parameters.AddWithValue("@Especialidade", key)
+            queryEditar.Parameters.AddWithValue("@KeyMedico", CodigoMedico)
 
             queryEditar.ExecuteNonQuery()
             queryEditar.Parameters.Clear()
@@ -570,6 +602,8 @@ Public Class Form4
         Btn_Especialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("area")
         Btn_Guardar.Enabled = False
         Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskettegray")
+        ButaoGuardar = Nothing
+        ButaoClick = False
         Tb_NomeMedico.Text = Nothing
         Tb_CartaoCidadao.Text = Nothing
         Dtp_DataNascimento.Value = Today
@@ -578,9 +612,9 @@ Public Class Form4
         Tb_CodigoPostal.Text = Nothing
         Tb_Contacto.Text = Nothing
         Tb_Email.Text = Nothing
+        Lst_Medicos.Enabled = True
         Lbl_SaveMethod.Text = "Sem Metodo Definido"
         SwitchFields()
-        Lst_Medicos.Enabled = True
 
         conexao.Close()
         Dados()

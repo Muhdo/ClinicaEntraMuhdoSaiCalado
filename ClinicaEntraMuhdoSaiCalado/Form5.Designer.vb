@@ -258,7 +258,7 @@ Partial Class Form5
         'Especialidade
         '
         Me.Especialidade.Text = "Especialidade"
-        Me.Especialidade.Width = 360
+        Me.Especialidade.Width = 356
         '
         'Panel2
         '

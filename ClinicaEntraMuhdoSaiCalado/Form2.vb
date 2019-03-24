@@ -1,7 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Public Class Form2
     Dim conexao As SqlConnection
-    Dim connectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + Application.StartupPath + "\Clinica.mdf;Integrated Security=True;"
+    ReadOnly connectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + Application.StartupPath + "\Clinica.mdf;Integrated Security=True;"
     Dim reader As SqlDataReader
 
     Dim ListaConsulta As List(Of Consultas) = New List(Of Consultas)()
@@ -10,7 +10,8 @@ Public Class Form2
     Dim ListaEspecialidade As List(Of Especialidades) = New List(Of Especialidades)()
 
     Private Sub Btn_Close_Click(sender As Object, e As EventArgs) Handles Btn_Close.Click
-        Form1.Close()
+        Form7.Show()
+        Me.Close()
     End Sub
 
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -99,10 +100,10 @@ Public Class Form2
         reader.Close()
         conexao.Close()
 
-        PopulateListBox()
+        Dados()
     End Sub
 
-    Private Sub PopulateListBox()
+    Private Sub Dados()
         Dim Utente As String
         Dim Medico As String
         Dim Data As Date
@@ -126,5 +127,10 @@ Public Class Form2
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub Btn_Gerir_Click(sender As Object, e As EventArgs) Handles Btn_Gerir.Click
+        Form7.Show()
+        Me.Close()
     End Sub
 End Class

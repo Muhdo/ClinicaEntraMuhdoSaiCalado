@@ -133,6 +133,12 @@
     <Compile Include="Form6.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form7.Designer.vb">
+      <DependentUpon>Form7.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form7.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -168,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form6.resx">
       <DependentUpon>Form6.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form7.resx">
+      <DependentUpon>Form7.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -259,6 +268,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\img\editgray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\addpapergray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\addpaper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\editpapergray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\findpapergray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\findpaper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\nurse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\paper.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -13,6 +13,7 @@ Public Class Form3
 
 
     Dim ButaoGuardar As Boolean 'True = Adicionar, False = Editar
+    Dim ButaoClick As Boolean = False
     Dim CodigoUtente As Integer = 0
 
     Dim NomeValido As Boolean = False
@@ -24,7 +25,7 @@ Public Class Form3
     Dim EmailValido As Boolean = True
 
     Private Sub Btn_Close_Click(sender As Object, e As EventArgs) Handles Btn_Close.Click
-        Form2.Show()
+        Form7.Show()
         Me.Close()
     End Sub
 
@@ -96,7 +97,9 @@ Public Class Form3
         Tb_CodigoPostal.Text = Nothing
         Tb_Contacto.Text = Nothing
         Tb_Email.Text = Nothing
+        Lst_Utentes.Enabled = False
         ButaoGuardar = True
+        ButaoClick = True
         Btn_Cancel.Enabled = True
         Btn_Cancel.BackgroundImage = My.Resources.ResourceManager.GetObject("cancel")
         Btn_AdicionarUtente.Enabled = False
@@ -112,6 +115,7 @@ Public Class Form3
         CodigoUtente = ListaUtente.Find(Function(u) u.NUtenteSaude = Lst_Utentes.FocusedItem.SubItems.Item(1).Text).KeyUtente
 
         ButaoGuardar = False
+        ButaoClick = True
         Btn_Cancel.Enabled = True
         Btn_Cancel.BackgroundImage = My.Resources.ResourceManager.GetObject("cancel")
         Btn_AdicionarUtente.Enabled = False
@@ -120,10 +124,12 @@ Public Class Form3
         Btn_EditarUtente.BackgroundImage = My.Resources.ResourceManager.GetObject("editusergray")
         Lbl_SaveMethod.Text = "Editar Utente"
         SwitchFields()
+        Validar()
     End Sub
 
     Private Sub Btn_Cancel_Click(sender As Object, e As EventArgs) Handles Btn_Cancel.Click
         ButaoGuardar = Nothing
+        ButaoClick = False
         Btn_EditarUtente.Enabled = False
         Btn_EditarUtente.BackgroundImage = My.Resources.ResourceManager.GetObject("editusergray")
         Tb_NomeUtente.Text = Nothing
@@ -177,7 +183,7 @@ Public Class Form3
     End Sub
 
     Sub Dados()
-        Dim queryUtentes As SqlCommand = New SqlCommand("SELECT Key_Utente, Nome, NumeroUtente, DataNascimento, Cidade, Morada, CodigoPostal, NumeroContacto, Email FROM Utente")
+        Dim queryUtentes As SqlCommand = New SqlCommand("SELECT Key_Utente, Nome, NumeroUtente, DataNascimento, Cidade, Morada, CodigoPostal, NumeroContacto, Email FROM Utente ORDER BY Nome, NumeroUtente")
         conexao.Open()
 
         queryUtentes.Connection = conexao
@@ -209,8 +215,10 @@ Public Class Form3
 
     Sub Validar()
         If NomeValido = True AndAlso UtenteSaudeValido = True AndAlso CidadeValido = True AndAlso MoradaValido = True AndAlso CodigoPostalValido = True AndAlso ContactoValido = True AndAlso EmailValido = True Then
-            Btn_Guardar.Enabled = True
-            Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskette")
+            If ButaoClick = True Then
+                Btn_Guardar.Enabled = True
+                Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskette")
+            End If
         Else
             Btn_Guardar.Enabled = False
             Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskettegray")
@@ -314,8 +322,10 @@ Public Class Form3
     End Sub
 
     Private Sub Dtp_DataNascimento_ValueChanged(sender As Object, e As EventArgs) Handles Dtp_DataNascimento.ValueChanged
-        If Dtp_DataNascimento.Value.ToShortDateString > Today.ToShortDateString Then
-            Dtp_DataNascimento.Value = Today.ToShortDateString
+        If Dtp_DataNascimento.Value > Today Then
+            Dtp_DataNascimento.Value = Today
+        ElseIf Dtp_DataNascimento.Value <= Today.AddYears(-125) Then
+            Dtp_DataNascimento.Value = Today
         End If
     End Sub
 
@@ -511,6 +521,8 @@ Public Class Form3
         Btn_EditarUtente.BackgroundImage = My.Resources.ResourceManager.GetObject("editusergray")
         Btn_Guardar.Enabled = False
         Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskettegray")
+        ButaoGuardar = Nothing
+        ButaoClick = False
         Tb_NomeUtente.Text = Nothing
         Tb_NumeroUtente.Text = Nothing
         Dtp_DataNascimento.Value = Today
@@ -519,9 +531,9 @@ Public Class Form3
         Tb_CodigoPostal.Text = Nothing
         Tb_Contacto.Text = Nothing
         Tb_Email.Text = Nothing
+        Lst_Utentes.Enabled = True
         Lbl_SaveMethod.Text = "Sem Metodo Definido"
         SwitchFields()
-        Lst_Utentes.Enabled = True
 
         conexao.Close()
         Dados()

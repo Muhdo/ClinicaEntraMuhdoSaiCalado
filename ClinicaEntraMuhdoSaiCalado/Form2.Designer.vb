@@ -23,6 +23,7 @@ Partial Class Form2
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.Btn_Close = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Lst_Consultas = New System.Windows.Forms.ListView()
@@ -56,9 +57,7 @@ Partial Class Form2
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Btn_EditarConsulta = New System.Windows.Forms.Button()
         Me.Btn_Gerir = New System.Windows.Forms.Button()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -77,6 +76,17 @@ Partial Class Form2
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1290, 35)
         Me.Panel1.TabIndex = 0
+        '
+        'Label13
+        '
+        Me.Label13.ForeColor = System.Drawing.Color.White
+        Me.Label13.Location = New System.Drawing.Point(12, 0)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(3)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(348, 35)
+        Me.Label13.TabIndex = 12
+        Me.Label13.Text = "Página Inicial"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Btn_Close
         '
@@ -135,7 +145,7 @@ Partial Class Form2
         'Data
         '
         Me.Data.Text = "Data"
-        Me.Data.Width = 120
+        Me.Data.Width = 116
         '
         'Panel3
         '
@@ -446,32 +456,12 @@ Partial Class Form2
         '
         'Panel4
         '
-        Me.Panel4.Controls.Add(Me.Btn_EditarConsulta)
         Me.Panel4.Controls.Add(Me.Btn_Gerir)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel4.Location = New System.Drawing.Point(0, 625)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(930, 60)
         Me.Panel4.TabIndex = 0
-        '
-        'Btn_EditarConsulta
-        '
-        Me.Btn_EditarConsulta.BackColor = System.Drawing.Color.Transparent
-        Me.Btn_EditarConsulta.BackgroundImage = Global.ClinicaEntraMuhdoSaiCalado.My.Resources.Resources.editpaper
-        Me.Btn_EditarConsulta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Btn_EditarConsulta.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Btn_EditarConsulta.Enabled = False
-        Me.Btn_EditarConsulta.FlatAppearance.BorderSize = 0
-        Me.Btn_EditarConsulta.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent
-        Me.Btn_EditarConsulta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.Btn_EditarConsulta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer))
-        Me.Btn_EditarConsulta.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Btn_EditarConsulta.ForeColor = System.Drawing.Color.White
-        Me.Btn_EditarConsulta.Location = New System.Drawing.Point(145, 0)
-        Me.Btn_EditarConsulta.Name = "Btn_EditarConsulta"
-        Me.Btn_EditarConsulta.Size = New System.Drawing.Size(60, 60)
-        Me.Btn_EditarConsulta.TabIndex = 1
-        Me.Btn_EditarConsulta.UseVisualStyleBackColor = False
         '
         'Btn_Gerir
         '
@@ -490,17 +480,6 @@ Partial Class Form2
         Me.Btn_Gerir.Size = New System.Drawing.Size(60, 60)
         Me.Btn_Gerir.TabIndex = 0
         Me.Btn_Gerir.UseVisualStyleBackColor = False
-        '
-        'Label13
-        '
-        Me.Label13.ForeColor = System.Drawing.Color.White
-        Me.Label13.Location = New System.Drawing.Point(12, 0)
-        Me.Label13.Margin = New System.Windows.Forms.Padding(3)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(348, 35)
-        Me.Label13.TabIndex = 12
-        Me.Label13.Text = "Página Inicial"
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Form2
         '
@@ -562,7 +541,6 @@ Partial Class Form2
     Friend WithEvents Lbl_Detalhes As Label
     Friend WithEvents Lbl_Data As Label
     Friend WithEvents Lbl_Especialidade As Label
-    Friend WithEvents Btn_EditarConsulta As Button
     Friend WithEvents Btn_Gerir As Button
     Friend WithEvents Lst_Consultas As ListView
     Friend WithEvents Utente As ColumnHeader

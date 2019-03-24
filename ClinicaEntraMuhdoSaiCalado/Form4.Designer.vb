@@ -23,6 +23,7 @@ Partial Class Form4
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.Btn_Close = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Tb_CartaoCidadao = New System.Windows.Forms.TextBox()
@@ -57,7 +58,6 @@ Partial Class Form4
         Me.Medico = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Especialidade = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -76,6 +76,17 @@ Partial Class Form4
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1290, 35)
         Me.Panel1.TabIndex = 2
+        '
+        'Label13
+        '
+        Me.Label13.ForeColor = System.Drawing.Color.White
+        Me.Label13.Location = New System.Drawing.Point(12, 0)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(3)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(348, 35)
+        Me.Label13.TabIndex = 13
+        Me.Label13.Text = "Médicos"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Btn_Close
         '
@@ -260,9 +271,9 @@ Partial Class Form4
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Lbl_SaveMethod.BackColor = System.Drawing.Color.Transparent
         Me.Lbl_SaveMethod.ForeColor = System.Drawing.Color.White
-        Me.Lbl_SaveMethod.Location = New System.Drawing.Point(464, 0)
+        Me.Lbl_SaveMethod.Location = New System.Drawing.Point(408, 0)
         Me.Lbl_SaveMethod.Name = "Lbl_SaveMethod"
-        Me.Lbl_SaveMethod.Size = New System.Drawing.Size(400, 60)
+        Me.Lbl_SaveMethod.Size = New System.Drawing.Size(456, 60)
         Me.Lbl_SaveMethod.TabIndex = 3
         Me.Lbl_SaveMethod.Text = "Sem Metodo Definido"
         Me.Lbl_SaveMethod.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -497,17 +508,6 @@ Partial Class Form4
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(360, 685)
         Me.Panel2.TabIndex = 4
-        '
-        'Label13
-        '
-        Me.Label13.ForeColor = System.Drawing.Color.White
-        Me.Label13.Location = New System.Drawing.Point(12, 0)
-        Me.Label13.Margin = New System.Windows.Forms.Padding(3)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(348, 35)
-        Me.Label13.TabIndex = 13
-        Me.Label13.Text = "Médicos"
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Form4
         '
