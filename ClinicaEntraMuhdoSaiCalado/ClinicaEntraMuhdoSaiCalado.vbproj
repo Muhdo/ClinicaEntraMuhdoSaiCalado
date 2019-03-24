@@ -296,5 +296,17 @@
   <ItemGroup>
     <None Include="bin\Debug\img\paper.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\img\deletegray.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

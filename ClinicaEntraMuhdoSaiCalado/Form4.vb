@@ -329,7 +329,34 @@ Public Class Form4
         Next
 
         If medico.Length >= 6 Then
-            NomeValido = True
+            Dim queryValidar As SqlCommand = New SqlCommand("SELECT * FROM Medico WHERE Nome = @Nome")
+            conexao.Open()
+            queryValidar.Connection = conexao
+            queryValidar.Parameters.AddWithValue("@Nome", Tb_NomeMedico.Text.Trim())
+
+            reader = queryValidar.ExecuteReader()
+            If reader.HasRows Then
+                reader.Read()
+
+                If ButaoGuardar = False AndAlso CodigoMedico <> 0 Then
+                    If CodigoMedico = reader("Key_Medico") And Tb_CartaoCidadao.Text = reader("Nome") Then
+                        NomeValido = True
+                        Lbl_ErroNumero.Text = Nothing
+                    Else
+                        NomeValido = False
+                        Lbl_ErroNumero.Text = "Nome de Médico já Registado"
+                    End If
+                Else
+                    NomeValido = False
+                    Lbl_ErroNumero.Text = "Nome de Médico já Registado"
+                End If
+            Else
+                NomeValido = True
+                Lbl_ErroNumero.Text = Nothing
+            End If
+
+            queryValidar.Parameters.Clear()
+            conexao.Close()
         End If
 
         Validar()

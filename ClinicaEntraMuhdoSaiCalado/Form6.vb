@@ -69,7 +69,7 @@ Public Class Form6
             Cb_Especialidade.Text = especialidade.Especialidade
             Dtp_DataConsulta.Value = consulta.Data
             Tb_Detalhes.Text = consulta.Descricao
-            Tb_Preco.Text = consulta.Preco
+            Tb_Preco.Text = consulta.Preco & "€"
         ElseIf Lst_Consultas.SelectedIndices.Count = 0 Then
             Btn_EditarConsulta.Enabled = False
             Btn_EditarConsulta.BackgroundImage = My.Resources.ResourceManager.GetObject("editpapergray")

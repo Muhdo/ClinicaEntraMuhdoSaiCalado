@@ -32,13 +32,15 @@ Partial Class Form5
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Lst_Especialidades = New System.Windows.Forms.ListView()
+        Me.Especialidade = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Btn_ApagarEspecialidade = New System.Windows.Forms.Button()
         Me.Btn_Cancel = New System.Windows.Forms.Button()
         Me.Btn_EditarEspecialidade = New System.Windows.Forms.Button()
         Me.Btn_AdicionarEspecialidade = New System.Windows.Forms.Button()
         Me.Btn_Guardar = New System.Windows.Forms.Button()
-        Me.Lst_Especialidades = New System.Windows.Forms.ListView()
-        Me.Especialidade = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Lbl_Erro = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -102,15 +104,16 @@ Partial Class Form5
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Lbl_SaveMethod.BackColor = System.Drawing.Color.Transparent
         Me.Lbl_SaveMethod.ForeColor = System.Drawing.Color.White
-        Me.Lbl_SaveMethod.Location = New System.Drawing.Point(342, 0)
+        Me.Lbl_SaveMethod.Location = New System.Drawing.Point(408, 0)
         Me.Lbl_SaveMethod.Name = "Lbl_SaveMethod"
-        Me.Lbl_SaveMethod.Size = New System.Drawing.Size(522, 60)
+        Me.Lbl_SaveMethod.Size = New System.Drawing.Size(456, 60)
         Me.Lbl_SaveMethod.TabIndex = 3
         Me.Lbl_SaveMethod.Text = "Sem Metodo Definido"
         Me.Lbl_SaveMethod.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.Lbl_Erro)
         Me.Panel3.Controls.Add(Me.Lbl_ErroEspecialidade)
         Me.Panel3.Controls.Add(Me.Tb_Especialidade)
         Me.Panel3.Controls.Add(Me.Panel5)
@@ -154,6 +157,7 @@ Partial Class Form5
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.Btn_ApagarEspecialidade)
         Me.Panel4.Controls.Add(Me.Btn_Cancel)
         Me.Panel4.Controls.Add(Me.Lbl_SaveMethod)
         Me.Panel4.Controls.Add(Me.Btn_EditarEspecialidade)
@@ -164,6 +168,54 @@ Partial Class Form5
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(930, 60)
         Me.Panel4.TabIndex = 0
+        '
+        'Lst_Especialidades
+        '
+        Me.Lst_Especialidades.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.Lst_Especialidades.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Especialidade})
+        Me.Lst_Especialidades.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Lst_Especialidades.ForeColor = System.Drawing.Color.White
+        Me.Lst_Especialidades.FullRowSelect = True
+        Me.Lst_Especialidades.Location = New System.Drawing.Point(0, 0)
+        Me.Lst_Especialidades.MultiSelect = False
+        Me.Lst_Especialidades.Name = "Lst_Especialidades"
+        Me.Lst_Especialidades.Size = New System.Drawing.Size(360, 685)
+        Me.Lst_Especialidades.TabIndex = 2
+        Me.Lst_Especialidades.UseCompatibleStateImageBehavior = False
+        Me.Lst_Especialidades.View = System.Windows.Forms.View.Details
+        '
+        'Especialidade
+        '
+        Me.Especialidade.Text = "Especialidade"
+        Me.Especialidade.Width = 356
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.Lst_Especialidades)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Panel2.Location = New System.Drawing.Point(0, 35)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(360, 685)
+        Me.Panel2.TabIndex = 4
+        '
+        'Btn_ApagarEspecialidade
+        '
+        Me.Btn_ApagarEspecialidade.BackColor = System.Drawing.Color.Transparent
+        Me.Btn_ApagarEspecialidade.BackgroundImage = Global.ClinicaEntraMuhdoSaiCalado.My.Resources.Resources.deletegray
+        Me.Btn_ApagarEspecialidade.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Btn_ApagarEspecialidade.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Btn_ApagarEspecialidade.Enabled = False
+        Me.Btn_ApagarEspecialidade.FlatAppearance.BorderSize = 0
+        Me.Btn_ApagarEspecialidade.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent
+        Me.Btn_ApagarEspecialidade.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.Btn_ApagarEspecialidade.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer))
+        Me.Btn_ApagarEspecialidade.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Btn_ApagarEspecialidade.ForeColor = System.Drawing.Color.White
+        Me.Btn_ApagarEspecialidade.Location = New System.Drawing.Point(276, 0)
+        Me.Btn_ApagarEspecialidade.Name = "Btn_ApagarEspecialidade"
+        Me.Btn_ApagarEspecialidade.Size = New System.Drawing.Size(60, 60)
+        Me.Btn_ApagarEspecialidade.TabIndex = 5
+        Me.Btn_ApagarEspecialidade.UseVisualStyleBackColor = False
         '
         'Btn_Cancel
         '
@@ -178,7 +230,7 @@ Partial Class Form5
         Me.Btn_Cancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer))
         Me.Btn_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Btn_Cancel.ForeColor = System.Drawing.Color.White
-        Me.Btn_Cancel.Location = New System.Drawing.Point(276, 0)
+        Me.Btn_Cancel.Location = New System.Drawing.Point(342, 0)
         Me.Btn_Cancel.Name = "Btn_Cancel"
         Me.Btn_Cancel.Size = New System.Drawing.Size(60, 60)
         Me.Btn_Cancel.TabIndex = 4
@@ -240,34 +292,16 @@ Partial Class Form5
         Me.Btn_Guardar.TabIndex = 0
         Me.Btn_Guardar.UseVisualStyleBackColor = False
         '
-        'Lst_Especialidades
+        'Lbl_Erro
         '
-        Me.Lst_Especialidades.BackColor = System.Drawing.Color.FromArgb(CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Lst_Especialidades.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Especialidade})
-        Me.Lst_Especialidades.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Lst_Especialidades.ForeColor = System.Drawing.Color.White
-        Me.Lst_Especialidades.FullRowSelect = True
-        Me.Lst_Especialidades.Location = New System.Drawing.Point(0, 0)
-        Me.Lst_Especialidades.MultiSelect = False
-        Me.Lst_Especialidades.Name = "Lst_Especialidades"
-        Me.Lst_Especialidades.Size = New System.Drawing.Size(360, 685)
-        Me.Lst_Especialidades.TabIndex = 2
-        Me.Lst_Especialidades.UseCompatibleStateImageBehavior = False
-        Me.Lst_Especialidades.View = System.Windows.Forms.View.Details
-        '
-        'Especialidade
-        '
-        Me.Especialidade.Text = "Especialidade"
-        Me.Especialidade.Width = 356
-        '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.Lst_Especialidades)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel2.Location = New System.Drawing.Point(0, 35)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(360, 685)
-        Me.Panel2.TabIndex = 4
+        Me.Lbl_Erro.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Lbl_Erro.ForeColor = System.Drawing.Color.White
+        Me.Lbl_Erro.Location = New System.Drawing.Point(151, 559)
+        Me.Lbl_Erro.Margin = New System.Windows.Forms.Padding(3)
+        Me.Lbl_Erro.Name = "Lbl_Erro"
+        Me.Lbl_Erro.Size = New System.Drawing.Size(330, 63)
+        Me.Lbl_Erro.TabIndex = 25
+        Me.Lbl_Erro.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Form5
         '
@@ -316,4 +350,6 @@ Partial Class Form5
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label9 As Label
     Friend WithEvents Label13 As Label
+    Friend WithEvents Btn_ApagarEspecialidade As Button
+    Friend WithEvents Lbl_Erro As Label
 End Class

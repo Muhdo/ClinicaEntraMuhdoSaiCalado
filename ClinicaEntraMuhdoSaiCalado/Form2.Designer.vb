@@ -57,6 +57,11 @@ Partial Class Form2
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Btn_Search = New System.Windows.Forms.Button()
+        Me.Tb_Conteudo = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Cb_Campo = New System.Windows.Forms.ComboBox()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.Btn_Gerir = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -209,7 +214,7 @@ Partial Class Form2
         Me.Lbl_Especialidade.Location = New System.Drawing.Point(148, 267)
         Me.Lbl_Especialidade.Margin = New System.Windows.Forms.Padding(3)
         Me.Lbl_Especialidade.Name = "Lbl_Especialidade"
-        Me.Lbl_Especialidade.Size = New System.Drawing.Size(779, 27)
+        Me.Lbl_Especialidade.Size = New System.Drawing.Size(319, 27)
         Me.Lbl_Especialidade.TabIndex = 20
         Me.Lbl_Especialidade.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
@@ -456,12 +461,74 @@ Partial Class Form2
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.Btn_Search)
+        Me.Panel4.Controls.Add(Me.Tb_Conteudo)
+        Me.Panel4.Controls.Add(Me.Label15)
+        Me.Panel4.Controls.Add(Me.Cb_Campo)
+        Me.Panel4.Controls.Add(Me.Label14)
         Me.Panel4.Controls.Add(Me.Btn_Gerir)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel4.Location = New System.Drawing.Point(0, 625)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(930, 60)
         Me.Panel4.TabIndex = 0
+        '
+        'Btn_Search
+        '
+        Me.Btn_Search.BackColor = System.Drawing.Color.Transparent
+        Me.Btn_Search.BackgroundImage = Global.ClinicaEntraMuhdoSaiCalado.My.Resources.Resources.search
+        Me.Btn_Search.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Btn_Search.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Btn_Search.FlatAppearance.BorderSize = 0
+        Me.Btn_Search.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent
+        Me.Btn_Search.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.Btn_Search.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(55, Byte), Integer))
+        Me.Btn_Search.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Btn_Search.ForeColor = System.Drawing.Color.White
+        Me.Btn_Search.Location = New System.Drawing.Point(473, 0)
+        Me.Btn_Search.Name = "Btn_Search"
+        Me.Btn_Search.Size = New System.Drawing.Size(60, 60)
+        Me.Btn_Search.TabIndex = 16
+        Me.Btn_Search.UseVisualStyleBackColor = False
+        '
+        'Tb_Conteudo
+        '
+        Me.Tb_Conteudo.Location = New System.Drawing.Point(151, 33)
+        Me.Tb_Conteudo.Name = "Tb_Conteudo"
+        Me.Tb_Conteudo.Size = New System.Drawing.Size(316, 23)
+        Me.Tb_Conteudo.TabIndex = 15
+        '
+        'Label15
+        '
+        Me.Label15.ForeColor = System.Drawing.Color.White
+        Me.Label15.Location = New System.Drawing.Point(151, 0)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(3)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(316, 27)
+        Me.Label15.TabIndex = 14
+        Me.Label15.Text = "Conteúdo"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Cb_Campo
+        '
+        Me.Cb_Campo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.Cb_Campo.FormattingEnabled = True
+        Me.Cb_Campo.Items.AddRange(New Object() {"Cidade", "Contacto", "Código-Postal", "Data Consulta", "Detalhes", "Email", "Especialidade", "Morada", "Nome Médico", "Nome Utente", "Nº Utente de Saude", "Valor a Pagar", "Todos", "Nenhum"})
+        Me.Cb_Campo.Location = New System.Drawing.Point(0, 33)
+        Me.Cb_Campo.Name = "Cb_Campo"
+        Me.Cb_Campo.Size = New System.Drawing.Size(145, 24)
+        Me.Cb_Campo.TabIndex = 13
+        '
+        'Label14
+        '
+        Me.Label14.ForeColor = System.Drawing.Color.White
+        Me.Label14.Location = New System.Drawing.Point(0, 0)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(3)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(145, 27)
+        Me.Label14.TabIndex = 12
+        Me.Label14.Text = "Campo a Pesquisar"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Btn_Gerir
         '
@@ -507,6 +574,7 @@ Partial Class Form2
         Me.Panel3.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -547,4 +615,9 @@ Partial Class Form2
     Friend WithEvents Medico As ColumnHeader
     Friend WithEvents Data As ColumnHeader
     Friend WithEvents Label13 As Label
+    Friend WithEvents Cb_Campo As ComboBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Btn_Search As Button
+    Friend WithEvents Tb_Conteudo As TextBox
+    Friend WithEvents Label15 As Label
 End Class

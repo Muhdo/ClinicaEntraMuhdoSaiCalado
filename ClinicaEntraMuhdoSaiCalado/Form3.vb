@@ -265,7 +265,34 @@ Public Class Form3
         Next
 
         If utente.Length >= 6 Then
-            NomeValido = True
+            Dim queryValidar As SqlCommand = New SqlCommand("SELECT * FROM Utente WHERE Nome = @Nome")
+            conexao.Open()
+            queryValidar.Connection = conexao
+            queryValidar.Parameters.AddWithValue("@Nome", Tb_NomeUtente.Text)
+
+            reader = queryValidar.ExecuteReader()
+            If reader.HasRows Then
+                reader.Read()
+
+                If ButaoGuardar = False AndAlso CodigoUtente <> 0 Then
+                    If CodigoUtente = reader("Key_Utente") And Tb_NumeroUtente.Text = reader("Nome") Then
+                        NomeValido = True
+                        Lbl_ErroNumero.Text = Nothing
+                    Else
+                        NomeValido = False
+                        Lbl_ErroNumero.Text = "Nome de Utente de Saude já Registado"
+                    End If
+                Else
+                    NomeValido = False
+                    Lbl_ErroNumero.Text = "Nome de Utente de Saude já Registado"
+                End If
+            Else
+                NomeValido = True
+                Lbl_ErroNumero.Text = Nothing
+            End If
+
+            queryValidar.Parameters.Clear()
+            conexao.Close()
         End If
 
         Validar()

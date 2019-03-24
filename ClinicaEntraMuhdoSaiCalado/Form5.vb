@@ -38,6 +38,8 @@ Public Class Form5
         If Lst_Especialidades.SelectedIndices.Count >= 1 Then
             Btn_EditarEspecialidade.Enabled = True
             Btn_EditarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("edit")
+            Btn_ApagarEspecialidade.Enabled = True
+            Btn_ApagarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("delete")
             Dim especialidade As Especialidades = ListaEspecialidade.Find(Function(es) es.Especialidade = Lst_Especialidades.FocusedItem.SubItems.Item(0).Text)
 
             CodigoEspecialidade = especialidade.KeyEspecialidade
@@ -45,6 +47,8 @@ Public Class Form5
         ElseIf Lst_Especialidades.SelectedIndices.Count = 0 Then
             Btn_EditarEspecialidade.Enabled = False
             Btn_EditarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("editgray")
+            Btn_ApagarEspecialidade.Enabled = False
+            Btn_ApagarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("deletegray")
             Tb_Especialidade.Text = Nothing
         End If
     End Sub
@@ -60,6 +64,8 @@ Public Class Form5
         Btn_AdicionarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("addgray")
         Btn_EditarEspecialidade.Enabled = False
         Btn_EditarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("editgray")
+        Btn_ApagarEspecialidade.Enabled = False
+        Btn_ApagarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("deletegray")
         Lbl_SaveMethod.Text = "Inserir Especialidade"
         SwitchFields()
     End Sub
@@ -76,6 +82,8 @@ Public Class Form5
         Btn_AdicionarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("addgray")
         Btn_EditarEspecialidade.Enabled = False
         Btn_EditarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("editgray")
+        Btn_ApagarEspecialidade.Enabled = False
+        Btn_ApagarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("deletegray")
         Lbl_SaveMethod.Text = "Editar Especialidade"
         SwitchFields()
         Validar()
@@ -97,6 +105,8 @@ Public Class Form5
         Lbl_SaveMethod.Text = "Sem Metodo Definido"
         Btn_Cancel.Enabled = False
         Btn_Cancel.BackgroundImage = My.Resources.ResourceManager.GetObject("cancelgray")
+        Btn_ApagarEspecialidade.Enabled = False
+        Btn_ApagarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("deletegray")
     End Sub
 
     Sub SwitchFields()
@@ -167,7 +177,34 @@ Public Class Form5
         Next
 
         If especialidade.Length >= 4 Then
-            EspecialidadeValido = True
+            Dim queryValidar As SqlCommand = New SqlCommand("SELECT * FROM Especialidade WHERE Especialidade = @Especialidade")
+            conexao.Open()
+            queryValidar.Connection = conexao
+            queryValidar.Parameters.AddWithValue("@Especialidade", Tb_Especialidade.Text.Trim())
+
+            reader = queryValidar.ExecuteReader()
+            If reader.HasRows Then
+                reader.Read()
+
+                If ButaoGuardar = False AndAlso CodigoEspecialidade <> 0 Then
+                    If CodigoEspecialidade = reader("Key_Especialidade") And Tb_Especialidade.Text = reader("Especialidade") Then
+                        EspecialidadeValido = True
+                        Lbl_ErroEspecialidade.Text = Nothing
+                    Else
+                        EspecialidadeValido = False
+                        Lbl_ErroEspecialidade.Text = "Especialidade já Registada"
+                    End If
+                Else
+                    EspecialidadeValido = False
+                    Lbl_ErroEspecialidade.Text = "Especialidade já Registada"
+                End If
+            Else
+                EspecialidadeValido = True
+                Lbl_ErroEspecialidade.Text = Nothing
+            End If
+
+            queryValidar.Parameters.Clear()
+            conexao.Close()
         End If
 
         Validar()
@@ -201,6 +238,8 @@ Public Class Form5
         Btn_EditarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("editusergray")
         Btn_Guardar.Enabled = False
         Btn_Guardar.BackgroundImage = My.Resources.ResourceManager.GetObject("diskettegray")
+        Btn_ApagarEspecialidade.Enabled = False
+        Btn_ApagarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("deletegray")
         ButaoGuardar = False
         ButaoClick = False
         Tb_Especialidade.Text = Nothing
@@ -210,5 +249,41 @@ Public Class Form5
 
         conexao.Close()
         Dados()
+    End Sub
+
+    Private Sub Btn_ApagarEspecialidade_Click(sender As Object, e As EventArgs) Handles Btn_ApagarEspecialidade.Click
+        Dim codigo As Integer = ListaEspecialidade.Find(Function(es) es.Especialidade = Tb_Especialidade.Text).KeyEspecialidade
+        Dim queryExiste As SqlCommand = New SqlCommand("SELECT * FROM Medico WHERE Key_Especialidade = @KeyEspecialidade")
+        conexao.Open()
+        queryExiste.Connection = conexao
+        queryExiste.Parameters.AddWithValue("@KeyEspecialidade", codigo)
+
+        reader = queryExiste.ExecuteReader()
+
+        If reader.HasRows Then
+            Lbl_Erro.Text = "Existem médicos com esta especialidade." & vbCrLf & "Altere a especialidade dos médicos para eliminar."
+
+            reader.Close()
+            conexao.Close()
+        Else
+            reader.Close()
+
+            Dim queryApagar As SqlCommand = New SqlCommand("DELETE FROM Especialidade WHERE Key_Especialidade = @KeyEspecialidade")
+            queryApagar.Connection = conexao
+            queryApagar.Parameters.AddWithValue("@KeyEspecialidade", codigo)
+
+            queryApagar.ExecuteNonQuery()
+            queryApagar.Parameters.Clear()
+
+            Btn_EditarEspecialidade.Enabled = False
+            Btn_EditarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("editusergray")
+            Btn_ApagarEspecialidade.Enabled = False
+            Btn_ApagarEspecialidade.BackgroundImage = My.Resources.ResourceManager.GetObject("deletegray")
+            Tb_Especialidade.Text = Nothing
+            Lbl_Erro.Text = Nothing
+
+            conexao.Close()
+            Dados()
+        End If
     End Sub
 End Class
