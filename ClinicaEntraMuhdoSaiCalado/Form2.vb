@@ -122,7 +122,7 @@ Public Class Form2
 
         reader.Close()
 
-        Dim queryConsulta As SqlCommand = New SqlCommand("SELECT Key_Consulta, Consulta.Key_Utente, Consulta.Key_Medico, Data, Descricao, Preco FROM Consulta ORDER BY Data DESC")
+        Dim queryConsulta As SqlCommand = New SqlCommand("SELECT Key_Consulta, Consulta.Key_Utente, Consulta.Key_Medico, Data, Descricao, Preco FROM Consulta ORDER BY Data")
 
         queryConsulta.Connection = conexao
 

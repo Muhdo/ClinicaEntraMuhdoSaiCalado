@@ -105,6 +105,7 @@ Public Class Form4
         Tb_CodigoPostal.Text = Nothing
         Tb_Contacto.Text = Nothing
         Tb_Email.Text = Nothing
+        Cb_Especialidade.Text = Nothing
         Cb_Especialidade.SelectedItem = -1
         Lst_Medicos.Enabled = False
         ButaoGuardar = True
@@ -155,6 +156,8 @@ Public Class Form4
         Tb_CodigoPostal.Text = Nothing
         Tb_Contacto.Text = Nothing
         Tb_Email.Text = Nothing
+        Cb_Especialidade.Text = Nothing
+        Cb_Especialidade.SelectedIndex = -1
         Tb_NomeMedico.ReadOnly = True
         Tb_CartaoCidadao.ReadOnly = True
         Dtp_DataNascimento.Enabled = False
@@ -278,6 +281,14 @@ Public Class Form4
     End Sub
 
     Sub Validar()
+        Console.WriteLine("Nome: " & NomeValido)
+        Console.WriteLine("Cartao: " & CartaoCidadaoValido)
+        Console.WriteLine("Cidade: " & CidadeValido)
+        Console.WriteLine("Morada: " & MoradaValido)
+        Console.WriteLine("Codigo: " & CodigoPostalValido)
+        Console.WriteLine("Contacto: " & ContactoValido)
+        Console.WriteLine("Email: " & EmailValido)
+        Console.WriteLine("Especialidade: " & EspecialidadeValido)
         If NomeValido = True AndAlso CartaoCidadaoValido = True AndAlso CidadeValido = True AndAlso MoradaValido = True AndAlso CodigoPostalValido = True AndAlso ContactoValido = True AndAlso EmailValido = True AndAlso EspecialidadeValido Then
             If ButaoClick = True Then
                 Btn_Guardar.Enabled = True
@@ -339,7 +350,7 @@ Public Class Form4
                 reader.Read()
 
                 If ButaoGuardar = False AndAlso CodigoMedico <> 0 Then
-                    If CodigoMedico = reader("Key_Medico") And Tb_CartaoCidadao.Text = reader("Nome") Then
+                    If CodigoMedico = reader("Key_Medico") And Tb_NomeMedico.Text = reader("Nome") Then
                         NomeValido = True
                         Lbl_ErroNumero.Text = Nothing
                     Else
@@ -571,13 +582,17 @@ Public Class Form4
     End Sub
 
     Private Sub Cb_Especialidade_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Cb_Especialidade.SelectedIndexChanged
-        Dim KeyEspecialidade As Integer = ListaEspecialidade.Find(Function(es) es.Especialidade = Cb_Especialidade.SelectedItem).KeyEspecialidade
+        Try
+            Dim KeyEspecialidade As Integer = ListaEspecialidade.Find(Function(es) es.Especialidade = Cb_Especialidade.SelectedItem).KeyEspecialidade
 
-        If KeyEspecialidade > 0 Then
-            EspecialidadeValido = True
-        Else
-            EspecialidadeValido = False
-        End If
+            If KeyEspecialidade > 0 Then
+                EspecialidadeValido = True
+            Else
+                EspecialidadeValido = False
+            End If
+        Catch ex As Exception
+
+        End Try
 
         Validar()
     End Sub
@@ -639,6 +654,8 @@ Public Class Form4
         Tb_CodigoPostal.Text = Nothing
         Tb_Contacto.Text = Nothing
         Tb_Email.Text = Nothing
+        Cb_Especialidade.Text = Nothing
+        Cb_Especialidade.SelectedIndex = -1
         Lst_Medicos.Enabled = True
         Lbl_SaveMethod.Text = "Sem Metodo Definido"
         SwitchFields()

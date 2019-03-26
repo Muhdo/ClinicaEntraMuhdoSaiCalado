@@ -353,7 +353,7 @@ Public Class Form6
 
         reader.Close()
 
-        Dim queryConsulta As SqlCommand = New SqlCommand("SELECT Key_Consulta, Key_Utente, Key_Medico, Data, Descricao, Preco FROM Consulta ORDER BY Data DESC")
+        Dim queryConsulta As SqlCommand = New SqlCommand("SELECT Key_Consulta, Key_Utente, Key_Medico, Data, Descricao, Preco FROM Consulta ORDER BY Data")
 
         queryConsulta.Connection = conexao
 
@@ -523,6 +523,15 @@ Public Class Form6
 
                 Exit For
             End If
+
+            If index >= 3 AndAlso preco(index - 3) = "," AndAlso Char.IsNumber(preco(index - 2)) AndAlso Char.IsNumber(preco(index - 1)) AndAlso Char.IsNumber(preco(index)) Then
+                Tb_Preco.Text = Tb_Preco.Text.Remove(index, 1)
+                Array.Clear(preco, 0, preco.Length)
+                preco = Tb_Preco.Text.Trim().ToCharArray()
+                Tb_Preco.SelectionStart = index + 1
+
+                Exit For
+            End If
         Next
     End Sub
 
@@ -530,6 +539,14 @@ Public Class Form6
         Dim keyUtente As Integer = ListaUtente.Find(Function(u) u.Nome = Cb_NomeUtente.Text.Trim() And u.NUtenteSaude = Cb_UtenteSaude.Text.Trim()).KeyUtente
         Dim key As Integer = ListaEspecialidade.Find(Function(es) es.Especialidade = Cb_Especialidade.Text.Trim()).KeyEspecialidade
         Dim keyMedico As Integer = ListaMedico.Find(Function(m) m.Nome = Cb_NomeMedico.Text.Trim() And m.KeyEspecialidade = key).KeyMedico
+
+        Dim preco As Decimal
+
+        If Tb_Preco.Text.Trim() = Nothing Then
+            preco = 0
+        Else
+            preco = Tb_Preco.Text.Trim()
+        End If
 
         If ButaoGuardar = True Then
             Dim queryInserir As SqlCommand = New SqlCommand("INSERT INTO Consulta (Key_Utente, Key_Medico, Data, Descricao, Preco) VALUES (@Key_Utente, @Key_Medico, @Data, @Descricao, @Preco)")
@@ -539,7 +556,7 @@ Public Class Form6
             queryInserir.Parameters.AddWithValue("@Key_Medico", keyMedico)
             queryInserir.Parameters.AddWithValue("@Data", Convert.ToDateTime(Dtp_DataConsulta.Value))
             queryInserir.Parameters.AddWithValue("@Descricao", Tb_Detalhes.Text.Trim())
-            queryInserir.Parameters.AddWithValue("@Preco", Tb_Preco.Text.Trim())
+            queryInserir.Parameters.AddWithValue("@Preco", preco)
 
             queryInserir.ExecuteNonQuery()
             queryInserir.Parameters.Clear()
@@ -551,7 +568,7 @@ Public Class Form6
             queryEditar.Parameters.AddWithValue("@Key_Medico", keyMedico)
             queryEditar.Parameters.AddWithValue("@Data", Convert.ToDateTime(Dtp_DataConsulta.Value))
             queryEditar.Parameters.AddWithValue("@Descricao", Tb_Detalhes.Text.Trim())
-            queryEditar.Parameters.AddWithValue("@Preco", Convert.ToDecimal(Tb_Preco.Text.Trim()))
+            queryEditar.Parameters.AddWithValue("@Preco", preco)
             queryEditar.Parameters.AddWithValue("@Key_Consulta", CodigoConsulta)
 
             queryEditar.ExecuteNonQuery()
